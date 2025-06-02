@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>สุขสันต์วันครบรอบ 💖</title>
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 40px;
+      color: #c71585;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    .heart {
+      font-size: 80px;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .btn-love {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: 0.3s;
+    }
+
+    .btn-love:hover {
+      background-color: #ff1493;
+    }
+
+    #loveMessage {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+
+    #daysTogether {
+      font-size: 1.2em;
+      margin-top: 15px;
+      color: #8b008b;
+    }
+  </style>
+</head>
+<body>
+  <div class="heart">💖</div>
+  <h1>สุขสันต์วันครบรอบน้าา</h1>
+
+  <div id="daysTogether"></div>
+
+  <button class="btn-love" onclick="showLoveMessage()">คลิกเพื่อรับความรัก 💌</button>
+
+  <div id="loveMessage"></div>
+
+  <script>
+    const messages = [
+      "รักเทอทุกวันเยยนะ 💕",
+      "ขอบคุณเทอที่อยู่ข้างกันเสมอ 😘",
+      "วันนี้เป็นวันที่พิเศษอีกวันหนึ่งเยย 💖",
+      "อยากอยู่กับเทอแบบนี้ตลอดไปเยย 💑",
+      "หัวใจของเค้าเป็นของเทอคนเดียวน้าา ❤️"
+    ];
+
+    function showLoveMessage() {
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      const message = messages[randomIndex];
+      document.getElementById("loveMessage").innerText = message;
+
+      // ดอกไม้ลอย
+      const heart = document.createElement("div");
+      heart.innerText = "🌸";
+      heart.style.position = "absolute";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = window.innerHeight + "px";
+      heart.style.fontSize = "30px";
+      document.body.appendChild(heart);
+
+      let y = window.innerHeight;
+      const interval = setInterval(() => {
+        y -= 2;
+        heart.style.top = y + "px";
+        if (y < -50) {
+          clearInterval(interval);
+          heart.remove();
+        }
+      }, 10);
+    }
+
+    // นับจำนวนวัน
+    function countDaysTogether(startDateStr) {
+      const startDate = new Date(startDateStr);
+      const today = new Date();
+      const diffTime = today - startDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays;
+    }
+
+    const days = countDaysTogether("2024-11-02"); // เปลี่ยนเป็นวันเริ่มคบกัน
+    document.getElementById("daysTogether").innerText = `เราอยู่ด้วยกันมาแล้ว ${days} วัน 🎉`;
+  </script>
+</body>
+</html>
